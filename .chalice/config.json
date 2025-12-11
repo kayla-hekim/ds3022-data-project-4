@@ -1,13 +1,26 @@
 {
   "version": "2.0",
   "app_name": "s3-events",
-  "environment_variables": {
-    "APP_BUCKET_NAME": "rkf9wd-access",
-    "DYNAMODB_TABLE_NAME": "access"
-  },
   "stages": {
     "dev": {
+      "environment_variables": {
+        "APP_BUCKET_NAME": "rkf9wd-access",
+        "DYNAMODB_TABLE_NAME": "access"
+      },
+      "lambda_memory_size": 128,
+      "lambda_timeout": 60,
       "api_gateway_stage": "api",
+      "autogen_policy": false,
+      "iam_policy_file": "policy.json"
+    },
+    "prod": {
+      "environment_variables": {
+        "APP_BUCKET_NAME": "BUCKET_NAME_PROD",
+        "DYNAMODB_TABLE_NAME": "access-prod"
+      },
+      "lambda_memory_size": 256,
+      "lambda_timeout": 60,
+      "api_gateway_stage": "prod",
       "autogen_policy": false,
       "iam_policy_file": "policy.json"
     }
